@@ -1,64 +1,51 @@
-# function1.py 
+# function1.py
+#불변형식
+a = 1.2
+print("a id:", id(a) )
+a = 2.3 
+print("a id:", id(a) )
 
-#1)함수 정의
-def setValue(newValue):
-    #지역변수 초기화
-    x = newValue
-    print("지역변수:", x)
+#가변형식
+lst = [1,2,3]
+print("lst id:", id(lst) )
+lst.append(4)
+print("lst id:", id(lst) )
+print(lst)
 
-#2)호출
-retValue = setValue(5)
-print(retValue)
+#가변형식
+def change(x):
+    #지역변수로 깊은 복사
+    x1 = x[:]
+    x1[0] = "H"
+    print("change함수내부:", x1)
 
-#튜플로 리턴
-def swap(x,y):
-    return y, x 
+#함수 호출
+wordlist = ["J","A","M"]
+change(wordlist)
+print("함수 호출후:", wordlist)
 
-#호출
-print(swap(3,4))
+#불변형식인데 읽기/쓰기를 하는 경우
+g = 1 
+def testScope(a):
+    #전역변수를 맵핑
+    #global g 
+    g = 2 
+    return g + a 
 
-#지역변수와 전역변수
-#전역변수
-x = 5 
-def func1(a):
-    return a+x 
+#함수 호출
+print( testScope(1) ) 
+print("전역변수 g:", g)
 
-#호출
-print(func1(1))
-
-def func2(a):
-    #지역변수
-    x = 10 
-    return a+x 
-
-#호출
-print(func2(1))
-
-#디버깅
-#교집합 리턴 함수
+#디버깅 
+#교집합 리턴하는 함수 
 def intersect(prelist, postlist):
-    #지역변수 
-    result = []
+    retList = []
     for x in prelist:
-        if x in postlist and x not in result:
-            result.append(x)
-    return result 
+        if x in postlist and x not in retList:
+            retList.append(x)
+    return retList 
+
 
 #호출
-print(intersect("HAM","SPAM"))
+print( intersect("HAM", "SPAM") )
 
-#기본값 셋팅
-def times(a=10, b=20):
-    return a*b 
-#호출
-print(times())
-print(times(b=5))
-print(times(5,6))
-
-#키워드 인자(매개변수명 기술)
-def connectURI(server, port):
-    strURL = "https://" + server + ":" + port 
-    return strURL 
-#호출
-print(connectURI("multi.com", "80"))
-print(connectURI(port="80", server="test.com"))

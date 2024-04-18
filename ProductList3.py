@@ -1,3 +1,4 @@
+#내가 사용하는 라이브러리 선언
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot, Qt
@@ -48,7 +49,7 @@ class Window(QMainWindow, form_class):
         self.prodID.returnPressed.connect(lambda: self.focusNextChild())
         self.prodName.returnPressed.connect(lambda: self.focusNextChild())
         self.prodPrice.returnPressed.connect(lambda: self.focusNextChild())
-        #더블클릭 시그널 처리
+        #더블클릭 시그널 처리(시그널+슬롯)
         self.tableWidget.doubleClicked.connect(self.doubleClick)
 
     def addProduct(self):
